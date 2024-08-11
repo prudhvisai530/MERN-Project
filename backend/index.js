@@ -4,6 +4,7 @@ const env = require("dotenv").config();
 const helmet = require("helmet");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const user = require("./routes/user");
 
 const MongoUrl = process.env.MONGO_URI;
 
@@ -18,6 +19,9 @@ mongoose
 
 app.use(helmet());
 app.use(morgan("combined"));
+app.use(express.json());
+
+app.use("/api/user", user);
 
 app.listen(process.env.PORT, () => {
   console.log(`application is running successfully`);
